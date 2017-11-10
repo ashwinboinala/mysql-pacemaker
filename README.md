@@ -64,9 +64,11 @@ Below is a simple solution to automate mysqlfailover using pacemaker:
        pcs property set no-quorum-policy=ignore
        ```  
    
-   8)  Enable all services 
+   8)  Start & enable all services 
        
        ```shell
+       pcs cluster start --all
+       
        pcs cluster enable --all
        
        ```
