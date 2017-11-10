@@ -12,7 +12,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
 
 2) You need a virtual Ip with a DNS entry. (ex: 1.2.3.4 DNS: mysqlcluster)
 
-2) Install pacemaker on both nodes, below are the installation steps.
+3) Install pacemaker on both nodes, below are the installation steps.
 
 
 
@@ -31,7 +31,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
     3)  Create a user on both mysql nodes and assign password
         (ex: hacluster)
         
-    4)  Cluster auth:
+    4)  Cluster auth
         ```shell
         #pcs cluster auth node1 node2
 
@@ -48,7 +48,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
         pcs cluster setup --start --name mysqlcluster mysqlnode1 mysqlnode2
         ```
         
-    6)  Add resource.
+    6)  Add resource
         ```shell
         #pcs resource create VirtualIP IPaddr2 ip=virtual_ip  cidr_netmask=24 --group Dns_name
 
@@ -73,7 +73,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
        
        ```
        
-   9)  Check status.
+   9)  Check status
        ```shell
         pcs status
        ``` 
