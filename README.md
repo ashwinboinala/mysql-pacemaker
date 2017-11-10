@@ -29,7 +29,7 @@ Prerequisites :
         
         systemctl start pcsd
         ```   
-    3) 	Create a user on both mysql nodes and assign password
+    3)  Create a user on both mysql nodes and assign password
         (ex: mysqlcluster user: hacluster pwwd: hacluster)
         
     4)  Cluster auth:
@@ -75,7 +75,7 @@ Prerequisites :
       ```shell
        pcs status
      ``` 
-   10) manual failover
+   10) Manual failover
        ```shell
        pcs cluster stop mysqlnode1
        
@@ -151,6 +151,15 @@ Prerequisites :
    ```
        
 
+6) Start mysqlfialover demon on secondary.
+
+   ```shell
+   
+   mysqlfailover --master=esnode1 --slaves=esnode2 --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
+   --exec-after=/scripts/after-failover.sh --log=/logs/mysql-repllogs.txt --log-age=30 --master-fail-retry=60 --force
+   
+   
+   ```
 
 
 
