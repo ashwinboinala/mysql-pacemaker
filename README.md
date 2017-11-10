@@ -86,7 +86,7 @@ Prerequisites :
        ```
       
       
-4) Auto failover script for pacemaker (pcs-failover.sh)
+4) Auto failover script for pacemaker (pcs-failover.sh), use below script to failover pcs.
 
    ```shell
    #!/bin/sh
