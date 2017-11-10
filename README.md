@@ -74,9 +74,9 @@ Below is a simple solution to automate mysql replication failover using pacemake
        ```
        
    9)  Check status.
-      ```shell
-       pcs status
-     ``` 
+       ```shell
+        pcs status
+       ``` 
    10) Manual failover
        ```shell
        pcs cluster stop mysqlnode1
