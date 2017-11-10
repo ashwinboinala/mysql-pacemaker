@@ -1,7 +1,7 @@
 # mysql-pacemaker
-Mysql auto failover using pacemaker.
+Mysql replication auto failover using pacemaker.
 
-Below is a simple solution to automate mysqlfailover using pacemaker:
+Below is a simple solution to automate mysql replication failover using pacemaker:
 
 
 1) Mysql installed on both the nodes with mysqlutilities and setup GTID replication.
