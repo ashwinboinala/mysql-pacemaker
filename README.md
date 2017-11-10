@@ -3,7 +3,6 @@ Mysql auto failover using pacemaker.
 
 Below is a simple solution to automate mysqlfailover using pacemaker:
 
-Prerequisites :
 
 1) Mysql installed on both the nodes with mysqlutilities and setup GTID replication.
        
@@ -11,7 +10,7 @@ Prerequisites :
        SUPER, GRANT OPTION, REPLICATION SLAVE, RELOAD, DROP, CREATE, INSERT, and SELECT.
        
 
-2) Virtual Ip with a DNS entry. (ex: 1.2.3.4 DNS: mysqlcluster)
+2) You need a virtual Ip with a DNS entry. (ex: 1.2.3.4 DNS: mysqlcluster)
 
 2) Install pacemaker on both nodes, below are the installation steps.
 
