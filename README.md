@@ -155,8 +155,8 @@ Prerequisites :
 
    ```shell
    
-   mysqlfailover --master=esnode1 --slaves=esnode2 --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
-   --exec-after=/scripts/after-failover.sh --log=/logs/mysql-repllogs.txt --log-age=30 --master-fail-retry=60 --force
+   mysqlfailover --master=mysqlnode1 --slaves=mysqlnode2 --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
+   --exec-after=/scripts/after-failover.sh --log=/logs/mysql-repllogs.txt --log-age=90 --master-fail-retry=60 --force
    
    
    ```
