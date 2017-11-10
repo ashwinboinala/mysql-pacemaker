@@ -5,9 +5,13 @@ Below is a simple solution to automate mysqlfailover using pacemaker:
 
 Prerequisites :
 
-1) Mysql installed on both the nodes with mysqlutilities.
+1) Mysql installed on both the nodes with mysqlutilities and setup GTID replication.
+       
+       All slaves must use --master-info-repository=TABLE and create a replication user (ex: repl_admin) with following priviliges:
+       SUPER, GRANT OPTION, REPLICATION SLAVE, RELOAD, DROP, CREATE, INSERT, and SELECT.
+       
 
-2) Virtual Ip with a DNS entry.
+2) Virtual Ip with a DNS entry. (ex: 1.2.3.4 DNS: mysqlcluster)
 
 2) Install pacemaker on both nodes, below are the installation steps.
 
@@ -75,10 +79,13 @@ Prerequisites :
        ```shell
        pcs cluster stop mysqlnode1
        
+       #verify if cluster is online on node2 (pcs status), then start cluster on node1
+       
+       pcs cluster start mysqlnode1
        ```
       
       
-4) Auto failover script for pacemaker:
+4) Auto failover script for pacemaker (pcs-failover.sh)
 
    ```shell
    #!/bin/sh
@@ -121,6 +128,27 @@ Prerequisites :
    
    ```
        
+
+5) I am using mysql_config_editor to connect to master and slave, this way you are not exposing your password.
+   Below is an example.
+   
+   ```shell
+   
+   #on node1
+        
+        mysql_config_editor set --login-path=mysqlnode1 --socket=/var/lib/mysql/mysql.sock --user=repl_admin --password 
+        --host=mysqlnode1 --port=3306
+        
+        mysql_config_editor set --login-path=mysqlnode2 --user=repl_admin --password --host=mysqlnode2 --port=3306
+        
+   #on node2 
+        
+        mysql_config_editor set --login-path=mysqlnode2 --socket=/var/lib/mysql/mysql.sock --user=repl_admin --password 
+        --host=mysqlnode2 --port=3306
+        
+        mysql_config_editor set --login-path=mysqlnode1 --user=repl_admin --password --host=mysqlnode1 --port=3306
+        
+   ```
        
 
 
