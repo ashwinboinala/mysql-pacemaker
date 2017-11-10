@@ -81,7 +81,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
        ```shell
        pcs cluster stop mysqlnode1
        
-       #verify if cluster is online on node2 (pcs status), then start cluster on node1
+       #verify if cluster is online on node2 (pcs status), then re-start the cluster on node1
        
        pcs cluster start mysqlnode1
        ```
