@@ -161,5 +161,11 @@ Prerequisites :
    
    ```
 
+7) Stop mysqlfailover
 
+   ```shell
+   
+   mysqlfailover --demon=stop
+   
+   ```
 
