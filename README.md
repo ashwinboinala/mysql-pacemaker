@@ -87,7 +87,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
        ```
       
       
-4) Auto failover script for pacemaker (pcs-failover.sh), use below script to failover pcs.
+4) Auto failover script for pacemaker (pcs-failover.sh), use below script to failover pcs.(run it on slave)
 
    ```shell
    #!/bin/sh
