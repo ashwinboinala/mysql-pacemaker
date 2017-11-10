@@ -38,6 +38,7 @@ Prerequisites :
 
         #ex :
         pcs cluster auth mysqlnode1 mysqlnode2
+        user: hacluster
         ```
     5)  Start the cluster
         ```shell
