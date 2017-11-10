@@ -29,7 +29,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
         systemctl start pcsd
         ```   
     3)  Create a user on both mysql nodes and assign password
-        (ex: mysqlcluster user: hacluster pwwd: hacluster)
+        (ex: hacluster)
         
     4)  Cluster auth:
         ```shell
