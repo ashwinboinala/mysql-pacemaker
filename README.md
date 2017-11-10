@@ -138,17 +138,17 @@ Below is a simple solution to automate mysqlfailover using pacemaker:
    
    #on node1
         
-        mysql_config_editor set --login-path=mysqlnode1 --socket=/var/lib/mysql/mysql.sock --user=repl_admin --password 
+        mysql_config_editor set --login-path=local --socket=/var/lib/mysql/mysql.sock --user=repl_admin --password 
         --host=mysqlnode1 --port=3306
         
-        mysql_config_editor set --login-path=mysqlnode2 --user=repl_admin --password --host=mysqlnode2 --port=3306
+        mysql_config_editor set --login-path=master --user=repl_admin --password --host=mysqlnode2 --port=3306
         
    #on node2 
         
-        mysql_config_editor set --login-path=mysqlnode2 --socket=/var/lib/mysql/mysql.sock --user=repl_admin --password 
+        mysql_config_editor set --login-path=local --socket=/var/lib/mysql/mysql.sock --user=repl_admin --password 
         --host=mysqlnode2 --port=3306
         
-        mysql_config_editor set --login-path=mysqlnode1 --user=repl_admin --password --host=mysqlnode1 --port=3306
+        mysql_config_editor set --login-path=master --user=repl_admin --password --host=mysqlnode1 --port=3306
         
    ```
        
@@ -157,7 +157,7 @@ Below is a simple solution to automate mysqlfailover using pacemaker:
 
    ```shell
    
-   mysqlfailover --master=mysqlnode1 --slaves=mysqlnode2 --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
+   mysqlfailover --master=master --slaves=local --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
    --exec-after=/scripts/after-failover.sh --log=/logs/mysql-repllogs.txt --log-age=90 --master-fail-retry=60 --force
    
    
