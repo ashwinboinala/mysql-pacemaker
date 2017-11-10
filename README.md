@@ -39,7 +39,7 @@ Below is a simple solution to automate mysqlfailover using pacemaker:
         pcs cluster auth mysqlnode1 mysqlnode2
         user: hacluster
         ```
-    5)  Start the cluster
+    5)  Setup the cluster
         ```shell
         #pcs cluster setup --start --name cluster_name(dns_name) node1 node2
 
