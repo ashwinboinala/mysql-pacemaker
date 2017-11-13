@@ -153,11 +153,11 @@ Below is a simple solution to automate mysql replication failover using pacemake
    ```
        
 
-6) Start mysqlfialover demon on slave, this will continously monitors the master & slave and all the activity is logged into --log    file, if the master is down and failover is triggered once the fialover is done the new master logpos is logged into log file and you can use that pos to start replicating data from new master to new slave.       
+6) Start mysqlfailover demon on slave, this will continously monitors the master & slave and all the activity is logged into --log    file, if the master is down and failover is triggered once the fialover is done the new master logpos is logged into log file and you can use that pos to start replicating data from new master to new slave.       
    ```shell
    
    mysqlfailover --master=master --slaves=local --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
-   --exec-after=/scripts/after-failover.sh --log=/mysql-repllogs.txt --log-age=90 --master-fail-retry=60 --force
+   --exec-after=/scripts/after-failover.sh --log=/repllogs.txt --log-age=90 --master-fail-retry=60 --force
    
    ```
    You can use --exec-after option to make changes on New master(Post-failover tasks) for example I turn off the read_only flag.
