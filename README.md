@@ -167,7 +167,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
    #if the fialover is triggered the new master info is logged into log file.
    ex: 
    Below is the sample log that gets generated after failover.
-   
+   ```
        2017-11-10 00:11:01 AM INFO Failed to reconnect to the master after 3 attempts.
        2017-11-10 00:11:01 AM CRITICAL Master is confirmed to be down or unreachable.
        2017-11-10 00:11:01 AM INFO Failover starting in 'auto' mode...
@@ -188,14 +188,14 @@ Below is a simple solution to automate mysql replication failover using pacemake
        2017-11-10 00:11:59 AM INFO Unregistering existing instances from slaves.
        2017-11-10 00:11:59 AM INFO Registering instance on new master mysqlnode2:3306.
        2017-11-10 00:11:59 AM INFO Master Information
-       2017-11-10 00:11:59 AM INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB: N/A
-       2017-11-10 00:11:59 AM INFO GTID Executed Set: 3c54f865-c5e4-11e7-8a8b-000c29a2555a:1-6[...]
+       2017-11-10 00:11:59 AM INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB: N/A
+       2017-11-10 00:11:59 AM INFO GTID Executed Set: 3c54f865-c5e4-11e7-8a8b-000c29a2555a:1-6[...]
        2017-11-10 00:11:59 AM INFO Getting health for master: mysqlnode2:3306.
        2017-11-10 00:11:59 AM INFO Health Status:
        2017-11-10 00:11:59 AM INFO host: mysqlnode2, port: 3306, role: MASTER, state: UP, gtid_mode: ON, health: OK
-   
-   #from the above log you can use "INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB: N/A" to 
-   start replicating data from new master to slaves.
+
+   ``` 
+#from the above log you can use "INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB:   N/A" to start replicating data from new master to slaves.
   
 
 7) Below is the command to stop mysqlfailover demon.
