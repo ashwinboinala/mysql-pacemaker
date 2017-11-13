@@ -160,11 +160,11 @@ Below is a simple solution to automate mysql replication failover using pacemake
    --exec-after=/scripts/after-failover.sh --log=/mysql-repllogs.txt --log-age=90 --master-fail-retry=60 --force
    
    ```
-   you can use --exec-after option to make changes on New master(Post-failover tasks) for example I turn off the read_only flag.
+   You can use --exec-after option to make changes on New master(Post-failover tasks) for example I turn off the read_only flag.
    ```
    mysql --login-path=local -e="SET GLOBAL read_only = OFF;" 
    ```
-   #if the fialover is triggered the new master info is logged into log file.
+   If the fialover is triggered the new master info is logged into log file.
    ex: 
    Below is the sample log that gets generated after failover.
    ```
@@ -195,7 +195,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
        2017-11-10 00:11:59 AM INFO host: mysqlnode2, port: 3306, role: MASTER, state: UP, gtid_mode: ON, health: OK
 
    ``` 
-#from the above log you can use "INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB:   N/A" to start replicating data from new master to slaves.
+   From the above log you can use "INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB:   N/A"      to start replicating data from new master to slaves.
   
 
 7) Below is the command to stop mysqlfailover demon.
