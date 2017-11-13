@@ -166,7 +166,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
    ```
    #if the fialover is triggered the new master info is logged into log file.
    ex: 
-   Below is the sample log that gets generated after failover is triggered.
+   Below is the sample log that gets generated after failover.
    
        2017-11-10 00:11:01 AM INFO Failed to reconnect to the master after 3 attempts.
        2017-11-10 00:11:01 AM CRITICAL Master is confirmed to be down or unreachable.
@@ -206,4 +206,4 @@ Below is a simple solution to automate mysql replication failover using pacemake
    
    ```
 
-Note: mysqlfailover is still a single point of failover, if the demon is stopped you have to restart it manual or you need to setup a job to monitor this demon.
+Note: mysqlfailover is still a single point of failover, if the demon is stopped you have to restart it or you need to setup a job to monitor this demon.
