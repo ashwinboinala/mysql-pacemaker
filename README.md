@@ -153,17 +153,52 @@ Below is a simple solution to automate mysql replication failover using pacemake
    ```
        
 
-6) Start mysqlfialover demon on secondary.
-
+6) Start mysqlfialover demon on slave, this will continously monitors the master & slave and all the activity is logged into --log    file, if the master is down and failover is triggered once the fialover is done the new master logpos is logged into log file and you can use that pos to start replicating data from new master to new slave.       
    ```shell
    
    mysqlfailover --master=master --slaves=local --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
-   --exec-after=/scripts/after-failover.sh --log=/logs/mysql-repllogs.txt --log-age=90 --master-fail-retry=60 --force
-   
+   --exec-after=/scripts/after-failover.sh --log=/mysql-repllogs.txt --log-age=90 --master-fail-retry=60 --force
    
    ```
+   you can use --exec-after option to make changes on New master(Post-failover tasks) for example I turn off the read_only flag.
+   ```
+   mysql --login-path=local -e="SET GLOBAL read_only = OFF;" 
+   ```
+   #if the fialover is triggered the new master info is logged into log file.
+   ex: 
+   Below is the sample log that gets generated after failover is triggered.
+   
+       2017-11-10 00:11:01 AM INFO Failed to reconnect to the master after 3 attempts.
+       2017-11-10 00:11:01 AM CRITICAL Master is confirmed to be down or unreachable.
+       2017-11-10 00:11:01 AM INFO Failover starting in 'auto' mode...
+       2017-11-10 00:11:01 AM INFO Candidate slave mysqlnode2:3306 will become the new master.
+       2017-11-10 00:11:01 AM INFO Checking slaves status (before failover).
+       2017-11-10 00:11:01 AM INFO Preparing candidate for failover.
+       2017-11-10 00:11:01 AM INFO Creating replication user if it does not exist.
+       2017-11-10 00:11:01 AM INFO Spawning external script.
+       2017-11-10 00:11:54 AM INFO Script completed Ok.
+       2017-11-10 00:11:54 AM INFO Stopping slaves.
+       2017-11-10 00:11:54 AM INFO Performing STOP on all slaves.
+       2017-11-10 00:11:54 AM INFO Switching slaves to new master.
+       2017-11-10 00:11:54 AM INFO Disconnecting new master as slave.
+       2017-11-10 00:11:54 AM INFO Starting slaves.
+       2017-11-10 00:11:54 AM INFO Performing START on all slaves.
+       2017-11-10 00:11:54 AM INFO Checking slaves for errors.
+       2017-11-10 00:11:54 AM INFO Failover complete.
+       2017-11-10 00:11:59 AM INFO Unregistering existing instances from slaves.
+       2017-11-10 00:11:59 AM INFO Registering instance on new master mysqlnode2:3306.
+       2017-11-10 00:11:59 AM INFO Master Information
+       2017-11-10 00:11:59 AM INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB: N/A
+       2017-11-10 00:11:59 AM INFO GTID Executed Set: 3c54f865-c5e4-11e7-8a8b-000c29a2555a:1-6[...]
+       2017-11-10 00:11:59 AM INFO Getting health for master: mysqlnode2:3306.
+       2017-11-10 00:11:59 AM INFO Health Status:
+       2017-11-10 00:11:59 AM INFO host: mysqlnode2, port: 3306, role: MASTER, state: UP, gtid_mode: ON, health: OK
+   
+   #from the above log you can use "INFO Binary Log File: mysql-bin.000004, Position: 1340, Binlog_Do_DB: N/A, Binlog_Ignore_DB: N/A" to 
+   start replicating data from new master to slaves.
+  
 
-7) Stop mysqlfailover
+7) Below is the command to stop mysqlfailover demon.
 
    ```shell
    
@@ -171,3 +206,4 @@ Below is a simple solution to automate mysql replication failover using pacemake
    
    ```
 
+Note: mysqlfailover is still a single point of failover, if the demon is stopped you have to restart it manual or you need to setup a job to monitor this demon.
