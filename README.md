@@ -6,7 +6,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
 
 1) Mysql installed on both the nodes with mysqlutilities and setup GTID replication.
        
-       All slaves must use --master-info-repository=TABLE and create a replication user (ex: repl_admin) with following priviliges:
+      > All slaves must use --master-info-repository=TABLE and create a replication user (ex: repl_admin) with following priviliges:
        SUPER, GRANT OPTION, REPLICATION SLAVE, RELOAD, DROP, CREATE, INSERT, and SELECT.
        
 
