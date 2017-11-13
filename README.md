@@ -160,7 +160,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
    --exec-after=/scripts/after-failover.sh --log=/repllogs.txt --log-age=90 --master-fail-retry=60 --force
    
    ```
-   You can use --exec-after option to make changes on New master(Post-failover tasks) for example I turn off the read_only flag.
+   You can use --exec-after option to make changes on New master(Post-failover tasks) for example I turn off the read_only flag on new master.
    ```
    mysql --login-path=local -e="SET GLOBAL read_only = OFF;" 
    ```
