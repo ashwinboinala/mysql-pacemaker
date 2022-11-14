@@ -131,8 +131,8 @@ Below is a simple solution to automate mysql replication failover using pacemake
    ```
        
 
-5) I am using mysql_config_editor to connect to master and slave, this way you are not exposing your password.
-   Below is an example.
+5) I am using mysql_config_editor to connect to master and slave.
+  
    
    ```shell
    
@@ -153,7 +153,7 @@ Below is a simple solution to automate mysql replication failover using pacemake
    ```
        
 
-6) Start mysqlfailover demon on slave, this will continously monitor the master & slave and all the activity is logged into --log    file, if the master is down and failover is triggered the new master logpos is logged into log file and you can use that pos to start replicating data from new master to new slave.       
+6) Start mysqlfailover demon on slave, this will continously monitor master & slave and all the activity is logged into --log   file, if the master is down and failover is triggered the new master logpos is logged into log file and you can use that pos to start replicating data.       
    ```shell
    
    mysqlfailover --master=master --slaves=local --failover-mode=auto --daemon=start --exec-before=/scripts/pcs-failover.sh 
@@ -206,4 +206,4 @@ Below is a simple solution to automate mysql replication failover using pacemake
    
    ```
 
-Note: mysqlfailover is still a single point of failover, if the demon is stopped you have to restart it and you can setup a job to monitor this demon.
+Note: mysqlfailover is still a single point of failover, if the demon is stopped you have to restart it and monitor it.
