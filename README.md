@@ -206,4 +206,4 @@ Below is a simple solution to automate mysql replication failover using pacemake
    
    ```
 
-Note: mysqlfailover is still a single point of failover, if the demon is stopped you have to restart it and monitor it.
+Note: mysqlfailover is still a single point of failover.
